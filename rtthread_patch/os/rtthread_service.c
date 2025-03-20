@@ -1025,7 +1025,11 @@ void _rtthread_wakelock_timeout(uint32_t timeout)
 u8 _rtthread_get_scheduler_state(void)
 {
     rt_thread_t thread = rt_thread_self();
+#if defined(RT_VERSION_CHECK) && (RTTHREAD_VERSION > RT_VERSION_CHECK(5, 1, 0))
+    u8 state =(RT_SCHED_CTX(thread).stat & RT_THREAD_STAT_MASK);
+#else
     u8 state = thread->stat;
+#endif
     switch(state){
         case RT_THREAD_INIT:        state = OS_SCHEDULER_NOT_STARTED;   break;
         case RT_THREAD_RUNNING:     state = OS_SCHEDULER_RUNNING;       break;

@@ -9,11 +9,12 @@
 
 #include "ameba_soc.h"
 #include "build_info.h"
+#include "rtcompiler.h"
 #include "rtthread.h"
 
 extern int rtthread_startup(void);
 
-RT_WEAK void SVC_Handler(void)
+rt_weak void SVC_Handler(void)
 {
 }
 
